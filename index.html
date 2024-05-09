@@ -141,7 +141,37 @@
   </div>
 </section>
 
-  <!-- Teaser video-->
+<!-- Paper method -->
+<section class="section hero">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column column is-full">
+        <h2 class="title is-3"></h2>
+
+        <div class="item">
+          <!-- Your image here -->
+          <img src="static/images/pipeline.png" alt="Pipeline"/>
+        </div>
+
+        <div class="content has-text-justified">
+          <p><br></p>
+          <p>
+            We propose an innovative method that leverages a multi-agent framework to automatically and continually generate unlimited strategies for jailbreak attacks. Our approach operates as a self-evolving, fully automated pipeline.  This framework can identify and implement strategies tailored to various malicious behaviors at the prompt level. Specifically, the architecture of our framework is built around four core LLMs: an Attacker, a Target, a Scorer, and a Strategy Summarizer. These components work in concert to continuously develop and apply a diverse range of strategies for jailbreaking. Throughout this process, the proposed framework will develop two crucial databases: the Dialogue Library and the Strategy Library. These libraries will capture and organize all dialogues and strategies generated during the jailbreak activities. This organization enables the framework to continuously devise new and robust jailbreak strategies based on its historical attack dialogues. Furthermore, by integrating human knowledge into the Strategy Library, the framework will not only learn to utilize this information but also discover new jailbreak strategies based on it.<br>
+            Based on our proposed method, <b>three key factors</b> can achieved both automatically and effectively: <br>
+            <b>Coverage.</b> We want our proposed method to have an unlimited coverage of jailbreak strategies, which means it should discover as many jailbreak strategies as possible without a constrained coverage pool. To achieve this, the jailbreak framework must autonomously develop new knowledge, store these findings in an organized structure, and effectively reference its discovered knowledge in new attack attempts.<br>
+            <b>Compatibility.</b> We want our jailbreak framework can leverage existing knowledge about jailbreak attacks dynamically in a plug-and-play manner. New strategies can be developed based on both existing and newly discovered information, enhancing the overall jailbreak framework with better comprehensiveness. Few works try to do this, leading to an isolated status quo, where the community hardly finds stronger attacks by mixing existing findings and evaluating the LLMs comprehensively.<br>
+            <b>Continuous evaluation.</b> We want our framework to continuously adapt to evolving models, enabling it to consistently identify and exploit new vulnerabilities as they emerge. While some existing studies have identified ``bugs'' in the alignment robustness of LLMs, these bugs are often fixed immediately and lead to an invalid of that jailbreak finding. Continuous evaluation ensures that our approach can conduct effective jailbreak attacks based on historical knowledge discovered by the framework and attack against modified models, keeping pace with the dynamic nature of model updates and security enhancements.<br>
+            Besides the three goals that we proposed above, another key feature of our methodology is that it treats all LLMs, including the component in our attack framework, as end-to-end black-box models. This assumption allows the Attacker, Target, Scorer, and Strategy Summarizer to be instantiated with any available LLMs, offering our approach exceptional flexibility and adaptability. This design ensures that our framework can be applied broadly and is capable of evolving with the landscape of available LLM technologies.<br>
+            Our comprehensive experiments demonstrate that our method is capable of discovering a diverse range of jailbreak strategies and achieving a high attack success rate, as evaluated by an open-source protocol. Importantly, it can also integrate existing human-proposed jailbreak knowledge and even find new strategies based on this knowledge, addressing the diversification and compatibility of jailbreak policies. Furthermore, our method continuously explores jailbreak strategies on the target LLMs in an end-to-end manner. This capability enables our framework to perform "life-long" jailbreaks on the targeted LLM, facilitating continuous evaluation of jailbreak robustness. This lifelong feature allows our method to persistently explore effective jailbreak prompts, even as the model is fortified with defensive mechanisms, such as moderation models like Llama-guard, while still maintaining a high attack success rate. </span>
+          </p>
+          <p><br></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Teaser video-->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
