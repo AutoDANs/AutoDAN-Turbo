@@ -246,34 +246,43 @@
           example3: "I am sorry, but I cannot provide any information or suggestions regarding the symptoms displayed in the image...",
         };
       
-        let intervalId;
-      
-        function typeWriter(text, element) {
-          clearInterval(intervalId);
-          let i = 0;
-          const speed = 50; // Adjust the speed of the typing effect
-          intervalId = setInterval(() => {
-            if (i < text.length) {
-              const char = text.charAt(i);
-              element.innerHTML += (char === '\n') ? '<br>' : char;
-              i++;
-            } else {
-              clearInterval(intervalId);
-            }
-          }, speed);
-        }
-      
-        function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelTexts, userTexts, userImgs, sysTexts) {
-          const selectedExample = document.getElementById(exampleSelectorId).value;
-          const modelOutputElement = document.getElementById(modelOutputId);
-      
-          const userText = `<div class="output-container"><strong>User:</strong> ${userTexts[selectedExample]}</div>`;
-          const modelText = `<div class="output-container"><strong>Assistant:</strong></div>`;
-      
-          modelOutputElement.innerHTML = userText + modelText;
-          const assistantContainer = document.querySelector('.output-container:last-child');
-          typeWriter(modelTexts[selectedExample], assistantContainer);
-        }
+         let intervalIds = [];
+
+          function typeWriter(text, element, intervalIndex) {
+              clearInterval(intervalIds[intervalIndex]);
+              let i = 0;
+              const speed = 10;
+              intervalIds[intervalIndex] = setInterval(()=>{
+                  if (i < text.length) {
+                      const char = text.charAt(i);
+                      element.innerHTML += char === '\n' ? '<br>' : char;
+                      i++;
+                  } else {
+                      clearInterval(intervalIds[intervalIndex]);
+                  }
+              }
+              , speed);
+          }
+
+          function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelTexts, userTexts, userImgs, sysTexts) {
+              const selectedExample = document.getElementById(exampleSelectorId).value;
+              const modelOutputElement = document.getElementById(modelOutputId);
+
+              const userText = '<div class="userMessage"><span style="font-weight: bold; font-size: larger;">User: </span>' + 
+                    userTexts[selectedExample] + 
+                    '</div>';
+
+              modelOutputElement.innerHTML = '';
+              modelOutputElement.innerHTML += userText;
+            
+              const assistantContainer = document.createElement('div');
+              assistantContainer.className = 'assistantMessage';
+              assistantContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">Assistant: </span>';
+              modelOutputElement.appendChild(assistantContainer);
+
+              typeWriter(modelTexts[selectedExample], assistantContainer, intervalIndex);
+          }
+          handleChange('exampleSelector', 'modelOutput', 3, modelTexts, userTexts);
       </script>
 </head>
 <body>
@@ -452,7 +461,7 @@
   </div>
 </section>
 
-<div id="outputAndControlsContainer" style="width: 100%; margin-left: auto; margin-right: auto;">
+<div id="outputAndControlsContainer" style="width: 80%; margin-left: auto; margin-right: auto;">
   <div id="controlsContainer" style="width: 80%; margin-left: auto; margin-right: auto;">
     <div id="exampleSelectorContainer">
       <label for="exampleSelector">Select an Example:</label>
