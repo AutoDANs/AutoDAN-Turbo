@@ -53,7 +53,7 @@
       gtag('config', 'G-RZ6PES7EKD');
   </script>
   <style>
-      #outputContainer, #outputContainer2, #outputContainer3, #outputContainer4 {
+      #outputContainer {
           display: flex;
           justify-content: center;
           align-items: start;
@@ -183,7 +183,7 @@
           /* Align items to the right */
       }
 
-      #controlsContainer, #controlsContainer2, #controlsContainer3, #controlsContainer4 {
+      #controlsContainer {
           display: flex;
           justify-content: left;
           align-items: left;
@@ -193,11 +193,11 @@
           margin-bottom: 2px;
       }
 
-      #exampleSelector option, #exampleSelector2 option, #exampleSelector3 option, #exampleSelector4 option {
+      #exampleSelector option {
           color: black;
       }
 
-      #exampleSelectorContainer label, #exampleSelectorContainer2 label, #exampleSelectorContainer3 label, #exampleSelectorContainer4 label {
+      #exampleSelectorContainer label {
           margin: 3px;
           color: white;
       }
@@ -248,48 +248,51 @@
       
        let intervalIds = [];
 
-        function typeWriter(text, element, delay, callback) {
-            let i = 0;
-            const speed = 50; // 每个字符的打印速度
-            const intervalId = setInterval(() => {
-                if (i < text.length) {
-                    const char = text.charAt(i);
-                    element.innerHTML += (char === '\n') ? '<br>' : char;
-                    i++;
-                } else {
-                    clearInterval(intervalId);
-                    if (callback) callback(); // 当文本打印完成后，调用回调函数
-                }
-            }, speed);
-        
-            setTimeout(() => clearInterval(intervalId), delay); // 设置超时，以防万一
+function typeWriter(text, element, delay, callback) {
+    let i = 0;
+    const speed = 30; // 加快打印速度
+    const intervalId = setInterval(() => {
+        if (i < text.length) {
+            const char = text.charAt(i);
+            element.innerHTML += (char === '\n') ? '<br>' : char;
+            i++;
+        } else {
+            clearInterval(intervalId);
+            if (callback) callback(); // 当文本打印完成后，调用回调函数
         }
+    }, speed);
+}
 
-      function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelTexts, userTexts) {
-          const selectedExample = document.getElementById(exampleSelectorId).value;
-          const modelOutputElement = document.getElementById(modelOutputId);
-      
-          const userText = '<div class="userMessage"><span style="font-weight: bold; font-size: larger;">User: </span></div>';
-          const modelText = '<div class="assistantMessage"><span style="font-weight: bold; font-size: larger;">Assistant: </span></div>';
-      
-          modelOutputElement.innerHTML = ''; // 清空现有内容
-          modelOutputElement.innerHTML += userText; // 添加用户消息容器
-          modelOutputElement.innerHTML += modelText; // 添加模型回答容器
-      
-          const userContainer = modelOutputElement.children[0];
-          const modelContainer = modelOutputElement.children[1];
-      
-          // 先使用打字机效果打印用户信息
-          typeWriter(userTexts[selectedExample], userContainer, 5000, () => {
-              // 用户信息打印完毕后，暂停一秒再打印模型回答
-              setTimeout(() => {
-                  typeWriter(modelTexts[selectedExample], modelContainer, 5000);
-              }, 1000);
-          });
-      }
-      
-      // 调用 handleChange 函数来初始化
-      handleChange('exampleSelector', 'modelOutput', 3, modelTexts, userTexts);
+function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelTexts, userTexts) {
+    const selectedExample = document.getElementById(exampleSelectorId).value;
+    const modelOutputElement = document.getElementById(modelOutputId);
+
+    // 清空现有内容
+    modelOutputElement.innerHTML = '';
+
+    // 创建用户和模型的消息容器
+    const userContainer = document.createElement('div');
+    userContainer.className = 'userMessage';
+    userContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">User: </span>';
+    const modelContainer = document.createElement('div');
+    modelContainer.className = 'assistantMessage';
+    modelContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">Assistant: </span>';
+
+    // 添加容器到输出元素
+    modelOutputElement.appendChild(userContainer);
+    modelOutputElement.appendChild(modelContainer);
+
+    // 先使用打字机效果打印用户信息
+    typeWriter(userTexts[selectedExample], userContainer, 5000, () => {
+        // 用户信息打印完毕后，暂停一秒再打印模型回答
+        setTimeout(() => {
+            typeWriter(modelTexts[selectedExample], modelContainer, 5000);
+        }, 1000);
+    });
+}
+
+// 调用 handleChange 函数来初始化
+handleChange('exampleSelector', 'modelOutput', 3, modelTexts, userTexts);
 
       </script>
 </head>
