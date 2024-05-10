@@ -248,7 +248,7 @@
       
        let intervalIds = [];
 
-function typeWriter(text, element, delay, callback) {
+function typeWriter(text, element, callback) {
     let i = 0;
     const speed = 30; // 调整打字速度
     const intervalId = setInterval(() => {
@@ -273,26 +273,26 @@ function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelText
     // 创建用户和模型的消息容器
     const userContainer = document.createElement('div');
     userContainer.className = 'userMessage';
-    userContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">User:</span><br>';
+    userContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">User: </span>';
     const modelContainer = document.createElement('div');
     modelContainer.className = 'assistantMessage';
-    modelContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">Assistant:</span><br>';
+    modelContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">Assistant: </span>';
 
     // 添加容器到输出元素
     modelOutputElement.appendChild(userContainer);
     modelOutputElement.appendChild(modelContainer);
 
-    // 获取文本部分的容器来添加打字效果
-    const userTextElement = document.createElement('div');
-    const modelTextElement = document.createElement('div');
-    userContainer.appendChild(userTextElement);
-    modelContainer.appendChild(modelTextElement);
+    // 创建用于打字效果的 span 元素
+    const userTextSpan = document.createElement('span');
+    userContainer.appendChild(userTextSpan);
+    const modelTextSpan = document.createElement('span');
+    modelContainer.appendChild(modelTextSpan);
 
     // 先使用打字机效果打印用户信息
-    typeWriter(userTexts[selectedExample], userTextElement, 5000, () => {
+    typeWriter(userTexts[selectedExample], userTextSpan, () => {
         // 用户信息打印完毕后，暂停一秒再打印模型回答
         setTimeout(() => {
-            typeWriter(modelTexts[selectedExample], modelTextElement, 5000);
+            typeWriter(modelTexts[selectedExample], modelTextSpan);
         }, 1000);
     });
 }
