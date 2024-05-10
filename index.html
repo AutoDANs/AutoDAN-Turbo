@@ -289,12 +289,14 @@ function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelText
     modelContainer.appendChild(modelTextSpan);
 
     // 先使用打字机效果打印用户信息
-    typeWriter(userTexts[selectedExample], userTextSpan, () => {
-        // 用户信息打印完毕后，暂停一秒再打印模型回答
-        setTimeout(() => {
-            typeWriter(modelTexts[selectedExample], modelTextSpan);
-        }, 1000);
-    });
+    setTimeout(() => {
+        typeWriter(userTexts[selectedExample], userTextSpan, () => {
+            // 用户信息打印完毕后，暂停一秒再打印模型回答
+            setTimeout(() => {
+                typeWriter(modelTexts[selectedExample], modelTextSpan);
+            }, 1000);
+        });
+    }, 200);  // 这里设置开始前的停顿时间为200毫秒
 }
 
 // 调用 handleChange 函数来初始化
