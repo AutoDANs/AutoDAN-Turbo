@@ -250,7 +250,7 @@
 
 function typeWriter(text, element, delay, callback) {
     let i = 0;
-    const speed = 30; // 加快打印速度
+    const speed = 30; // 调整打字速度
     const intervalId = setInterval(() => {
         if (i < text.length) {
             const char = text.charAt(i);
@@ -258,7 +258,7 @@ function typeWriter(text, element, delay, callback) {
             i++;
         } else {
             clearInterval(intervalId);
-            if (callback) callback(); // 当文本打印完成后，调用回调函数
+            if (callback) callback(); // 完成后调用回调函数
         }
     }, speed);
 }
@@ -273,20 +273,26 @@ function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelText
     // 创建用户和模型的消息容器
     const userContainer = document.createElement('div');
     userContainer.className = 'userMessage';
-    userContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">User: </span>';
+    userContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">User:</span><br>';
     const modelContainer = document.createElement('div');
     modelContainer.className = 'assistantMessage';
-    modelContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">Assistant: </span>';
+    modelContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">Assistant:</span><br>';
 
     // 添加容器到输出元素
     modelOutputElement.appendChild(userContainer);
     modelOutputElement.appendChild(modelContainer);
 
+    // 获取文本部分的容器来添加打字效果
+    const userTextElement = document.createElement('div');
+    const modelTextElement = document.createElement('div');
+    userContainer.appendChild(userTextElement);
+    modelContainer.appendChild(modelTextElement);
+
     // 先使用打字机效果打印用户信息
-    typeWriter(userTexts[selectedExample], userContainer, 5000, () => {
+    typeWriter(userTexts[selectedExample], userTextElement, 5000, () => {
         // 用户信息打印完毕后，暂停一秒再打印模型回答
         setTimeout(() => {
-            typeWriter(modelTexts[selectedExample], modelContainer, 5000);
+            typeWriter(modelTexts[selectedExample], modelTextElement, 5000);
         }, 1000);
     });
 }
