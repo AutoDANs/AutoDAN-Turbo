@@ -209,11 +209,11 @@
 <section class="section hero">
 <div class="container is-max-desktop">
   <div class="columns is-centered has-text-centered">
-    <div class="column column is-full">
+    <div class="column is-full">
       <h2 class="title is-3"></h2>
 
-      <div class="item">
-        <iframe src="static/tables/table_1.htm" width="100%" height="auto" frameborder="0" style="min-height: 600px;"></iframe>
+      <div class="item" style="overflow-x: auto;">
+        <iframe src="static/tables/table_1.htm" style="width: 1px; min-width: 100%;" frameborder="0"></iframe>
       </div>
 
       <div class="content has-text-justified">
@@ -251,16 +251,6 @@
 <!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
 
     <!-- End of Statcounter Code -->
-
-<script>
-  window.onload = function() {
-    var iframe = document.querySelector('iframe');
-    iframe.onload = function() {
-      this.style.height = this.contentWindow.document.documentElement.scrollHeight + 'px';
-    };
-  };
-</script>
-
 
   </body>
   </html>
