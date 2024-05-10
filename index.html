@@ -246,43 +246,51 @@
           example3: "I am sorry, but I cannot provide any information or suggestions regarding the symptoms displayed in the image...",
         };
       
-         let intervalIds = [];
+       let intervalIds = [];
 
-          function typeWriter(text, element, intervalIndex) {
-              clearInterval(intervalIds[intervalIndex]);
-              let i = 0;
-              const speed = 10;
-              intervalIds[intervalIndex] = setInterval(()=>{
-                  if (i < text.length) {
-                      const char = text.charAt(i);
-                      element.innerHTML += char === '\n' ? '<br>' : char;
-                      i++;
-                  } else {
-                      clearInterval(intervalIds[intervalIndex]);
-                  }
-              }
-              , speed);
-          }
+        function typeWriter(text, element, delay, callback) {
+            let i = 0;
+            const speed = 50; // 每个字符的打印速度
+            const intervalId = setInterval(() => {
+                if (i < text.length) {
+                    const char = text.charAt(i);
+                    element.innerHTML += (char === '\n') ? '<br>' : char;
+                    i++;
+                } else {
+                    clearInterval(intervalId);
+                    if (callback) callback(); // 当文本打印完成后，调用回调函数
+                }
+            }, speed);
+        
+            setTimeout(() => clearInterval(intervalId), delay); // 设置超时，以防万一
+        }
 
-          function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelTexts, userTexts, userImgs, sysTexts) {
-              const selectedExample = document.getElementById(exampleSelectorId).value;
-              const modelOutputElement = document.getElementById(modelOutputId);
+      function handleChange(exampleSelectorId, modelOutputId, intervalIndex, modelTexts, userTexts) {
+          const selectedExample = document.getElementById(exampleSelectorId).value;
+          const modelOutputElement = document.getElementById(modelOutputId);
+      
+          const userText = '<div class="userMessage"><span style="font-weight: bold; font-size: larger;">User: </span></div>';
+          const modelText = '<div class="assistantMessage"><span style="font-weight: bold; font-size: larger;">Assistant: </span></div>';
+      
+          modelOutputElement.innerHTML = ''; // 清空现有内容
+          modelOutputElement.innerHTML += userText; // 添加用户消息容器
+          modelOutputElement.innerHTML += modelText; // 添加模型回答容器
+      
+          const userContainer = modelOutputElement.children[0];
+          const modelContainer = modelOutputElement.children[1];
+      
+          // 先使用打字机效果打印用户信息
+          typeWriter(userTexts[selectedExample], userContainer, 5000, () => {
+              // 用户信息打印完毕后，暂停一秒再打印模型回答
+              setTimeout(() => {
+                  typeWriter(modelTexts[selectedExample], modelContainer, 5000);
+              }, 1000);
+          });
+      }
+      
+      // 调用 handleChange 函数来初始化
+      handleChange('exampleSelector', 'modelOutput', 3, modelTexts, userTexts);
 
-              const userText = '<div class="userMessage"><span style="font-weight: bold; font-size: larger;">User: </span>' + 
-                    userTexts[selectedExample] + 
-                    '</div>';
-
-              modelOutputElement.innerHTML = '';
-              modelOutputElement.innerHTML += userText;
-            
-              const assistantContainer = document.createElement('div');
-              assistantContainer.className = 'assistantMessage';
-              assistantContainer.innerHTML = '<span style="font-weight: bold; font-size: larger;">Assistant: </span>';
-              modelOutputElement.appendChild(assistantContainer);
-
-              typeWriter(modelTexts[selectedExample], assistantContainer, intervalIndex);
-          }
-          handleChange('exampleSelector', 'modelOutput', 3, modelTexts, userTexts);
       </script>
 </head>
 <body>
@@ -462,7 +470,7 @@
 </section>
 
 <div id="outputAndControlsContainer" style="width: 80%; margin-left: auto; margin-right: auto;">
-  <div id="controlsContainer" style="width: 80%; margin-left: auto; margin-right: auto;">
+  <div id="controlsContainer" style="width: 50%; margin-left: auto; margin-right: auto;">
     <div id="exampleSelectorContainer">
       <label for="exampleSelector">Select an Example:</label>
       <select id="exampleSelector" onchange="handleChange('exampleSelector', 'modelOutput', 3, modelTexts, userTexts)">
