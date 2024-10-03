@@ -369,23 +369,34 @@
                         Self-Exploration to Jailbreak LLMs</h1>
                     <div class="is-size-5 publication-authors">
                         <!-- Paper authors -->
-                        <span class="author-block">
-                <a href="https://sheltonliu-n.github.io" target="_blank">Xiaogeng Liu</a><sup>* 1</sup>,</span>
-                        <span class="author-block">
-                  <a href="https://scholar.google.com/citations?user=AbleBdQAAAAJ&hl=en"
-                     target="_blank">Peiran Li</a><sup>* 1</sup>,</span>
-                        <span class="author-block">
-                    <a href="http://web.cse.ohio-state.edu/~sun.397/" target="_blank">Huan Sun</a><sup>2</sup>,</span>
-                        <span class="author-block">
-                      <a href="https://aisecure.github.io" target="_blank">Bo Li</a><sup>3</sup>,</span>
-                        <span class="author-block">
-                          <a href="https://xiaocw11.github.io" target="_blank">Chaowei Xiao</a><sup>1</sup> </span>
+                         <span class="author-block">
+                            <a href="https://sheltonliu-n.github.io" target="_blank">Xiaogeng Liu</a><sup>* 1</sup>,</span>
+                            <span class="author-block">
+                              <a href="https://scholar.google.com/citations?user=AbleBdQAAAAJ&hl=en" target="_blank">Peiran Li</a><sup>* 1</sup>,</span>
+                              <span class="author-block">
+                                  <a href="https://tsg.ece.cornell.edu/people/g-edward-suh/" target="_blank">Edward Suh</a><sup>2,3</sup>,</span>
+                                  <span class="author-block">
+                                      <a href="https://vorobeychik.com/" target="_blank">Yevgeniy Vorobeychik</a><sup>4</sup>,</span>
+                                      <span class="author-block">
+                                          <a href="https://web.eecs.umich.edu/~zmao/" target="_blank">Zhuoqing Mao</a><sup>5</sup>,</span>
+                                          <span class="author-block">
+                                              <a href="https://pages.cs.wisc.edu/~jha/" target="_blank">Somesh Jha</a><sup>1</sup>,</span>
+                                              <span class="author-block">
+                                                  <a href="https://patrickmcdaniel.org/" target="_blank">Patrick McDaniel</a><sup>1</sup>,</span>
+                                                  <span class="author-block">
+                                                    <a href="http://web.cse.ohio-state.edu/~sun.397/" target="_blank">Huan Sun</a><sup>6</sup>,</span>
+                                                    <span class="author-block">
+                                                      <a href="https://aisecure.github.io" target="_blank">Bo Li</a><sup>7</sup>,</span>
+                                                       <span class="author-block">
+                                                          <a href="https://xiaocw11.github.io" target="_blank">Chaowei Xiao</a><sup>1,2</sup> </span>
                     </div>
 
                     <div class="is-size-5 publication-authors">
                         <span class="author-block" style="font-size: small;">* Equal Contribution</span><br>
                         <span class="author-block"><i>Pre-print</i><br>
-                      <sup>1</sup>University of Wisconsin–Madison, <sup>2</sup>The Ohio State University, <sup>3</sup>University of Chicago
+                        <sup>1</sup>University of Wisconsin–Madison, <sup>2</sup>NVIDIA, <sup>3</sup>Cornell University, <sup>4</sup>Washington University, St. Louis
+                      
+                        <sup>5</sup>University of Michigan, Ann Arbor, <sup>6</sup>The Ohio State University, <sup>7</sup>UIUC
                     </span>
                     </div>
 
@@ -438,23 +449,9 @@
             <div class="column is-four-fifths">
                 <h2 class="title is-3">Abstract</h2>
                 <div class="content has-text-justified">
-                    <p>
-                        Jailbreak attacks serve as essential red-teaming tools, proactively assessing whether LLMs can
-                        behave responsibly and safely in adversarial environments. Despite diverse strategies (e.g.,
-                        cipher, low-resource language, persuasions, and so on) that have been proposed, they still rely
-                        on human-designed strategies, limiting their scope and effectiveness as a red-teaming tool.
-                        In this paper, we propose <strong><em>AutoDAN-Turbo</em></strong>, a black-box jailbreak
-                        framework that <strong>can
-                        automatically discover as many jailbreak strategies as possible from scratch, without any human
-                        intervention or predefined scopes (e.g., specified candidate strategies)</strong>. As a result,
-                        AutoDAN-Turbo can automatically develop diverse jailbreak attack strategies and significantly
-                        outperform baseline methods, achieving a 74.3% higher average attack success rate on public
-                        benchmarks. Notably, AutoDAN-Turbo achieves an 88.5% success rate on GPT-4-1106-turbo.<br>
-                        In addition, <strong><em>AutoDAN-Turbo</em></strong> is a unified framework that <strong>can
-                        incorporate existing human-designed
-                        jailbreak strategies in a plug-and-play manner.</strong> By integrating these strategies,
-                        AutoDAN-Turbo can
-                        even achieve a higher success rate of 93.4% on GPT-4-1106-turbo.</p>
+                <p>
+                In this paper, we propose <strong>AutoDAN-Turbo</strong>, a black-box jailbreak method that can automatically discover as many jailbreak strategies as possible from scratch, without any human intervention or predefined scopes (e.g., specified candidate strategies), and use them for red-teaming. As a result, \modelname~can significantly outperform baseline methods, achieving a <strong>74.3%</strong> higher average attack success rate on public benchmarks. Notably, AutoDAN-Turbo achieves an <strong>88.5</strong> attack success rate on GPT-4-1106-turbo. In addition, AutoDAN-Turbo is a unified framework that can incorporate existing human-designed jailbreak strategies in a plug-and-play manner. By integrating human-designed strategies, AutoDAN-Turbo can even achieve a higher attack success rate of <strong>93.4</strong> on GPT-4-1106-turbo.
+                </p>
                 </div>
                 <div class="flex-row flex-column">
                     <button class="custom-button-flat pulse-primary text-center"><span><strong>Jailbreak Strategy</strong>:
