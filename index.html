@@ -449,10 +449,10 @@
                 <p>
                 In this paper, we propose <strong>AutoDAN-Turbo</strong>, a black-box jailbreak method that can automatically discover as many jailbreak strategies as possible from scratch, without any human intervention or predefined scopes (e.g., specified candidate strategies), and use them for red-teaming. As a result, \modelname~can significantly outperform baseline methods, achieving a <strong>74.3%</strong> higher average attack success rate on public benchmarks. Notably, AutoDAN-Turbo achieves an <strong>88.5</strong> attack success rate on GPT-4-1106-turbo. In addition, AutoDAN-Turbo is a unified framework that can incorporate existing human-designed jailbreak strategies in a plug-and-play manner. By integrating human-designed strategies, AutoDAN-Turbo can even achieve a higher attack success rate of <strong>93.4</strong> on GPT-4-1106-turbo.
                 </p>
+                <img class="image" src="static/images/intro.png">
+                <p class="image-caption">Left: our method AutoDAN-Turbo achieves the best attack performance compared with other black-box baselines in <a href="https://www.harmbench.org" target="_blank">Harmbench</a>, surpassing the runner-up by a large margin. Right: our method AutoDAN-Turbo autonomously discovers jailbreak strategies without human intervention and generates jailbreak prompts based on the specific strategies it discovers.
+                </p>
                 </div>
-                <img class="center" src="static/images/intro.png", width=2000>
-                <br>
-                <p class="image-caption">Left: our method AutoDAN-Turbo achieves the best attack performance compared with other black-box baselines in <a href="https://www.harmbench.org" target="_blank">Harmbench</a>, surpassing the runner-up by a large margin. Right: our method AutoDAN-Turbo autonomously discovers jailbreak strategies without human intervention and generates jailbreak prompts based on the specific strategies it discovers.</p>
                 <!--    
                 <div class="flex-row flex-column">
                     <button class="custom-button-flat pulse-primary text-center"><span><strong>Jailbreak Strategy</strong>:
@@ -478,17 +478,9 @@
                 </div>
 
                 <div class="content has-text-justified">
-                    <h2> Outstanding Highlights and Properties </h2>
-                    <hr>
                     <h4>Automatic Strategy Discovery</h4>
-                    AutoDAN-Turbo consistently innovates and evolves effective jailbreak strategies through
-                    relentless attempts, all without human intervention or reliance on predefined strategies. The system
-                    learns from previously discovered strategies, enhancing its ability to devise even more powerful and
-                    efficient strategies over time. A noteworthy feature of our advanced, fully automated pipeline
-                    is its capability to automatically convert discovered strategies into a specific data structure.
-                    This structure is then incorporated into a strategy library, which AutoDAN-Turbo can reference and
-                    utilize in future jailbreak attempts. This system exemplifies the power of autonomous learning and
-                    adaptation in the pursuit of continual improvement.
+                    AutoDAN-Turbo can discover new jailbreak strategies without human intervention or reliance on predefined strategies. The system learns from previously discovered strategies, enhancing its ability to devise even more powerful and efficient strategies over time. AutoDAN-Turbo can automatically convert discovered strategies into a specific data structure. This structure is then incorporated into a strategy library, which AutoDAN-Turbo can reference and utilize in future jailbreak attempts. 
+                    <!--
                     <br>
                     <br>
                     <!-- property 2  -->
@@ -505,23 +497,24 @@
                     AutoDAN-Turbo operates as a black-box system, requiring access only to the outputs of the Large
                     Language Models (LLMs) and does not necessitate any interaction with the underlying LLM
                     infrastructure.
-                    <br>
+                    -->
                     <br>
                     <video preload controls autoplay loop muted playsinline class="image">
                         <source src="static/videos/banner_video.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <p class="image-caption">
-                        As demonstrated in our video, AutoDAN-Turbo persistently attempts jailbreaking against various
-                        malicious requests. Throughout this ongoing endeavor, it progressively evolves and refines
-                        increasingly complex jailbreak strategies. Remarkably, this entire process is fully
-                        automated, devoid of human intervention.
+                    As demonstrated in our video, AutoDAN-Turbo persistently attempts jailbreaking against various
+                    malicious requests. Throughout this ongoing endeavor, it progressively evolves and refines
+                    increasingly complex jailbreak strategies. Remarkably, this entire process is fully
+                    automated, devoid of human intervention.
                     </p>
                 </div>
             </div>
         </div>
     </div>
 
+    <!--
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column column is-full">
@@ -629,7 +622,8 @@
             </div>
         </div>
     </div>
-
+    -->
+    
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column column is-full">
