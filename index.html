@@ -509,117 +509,11 @@
             </div>
         </div>
     </div>
-
-    <!--
-    <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column column is-full">
-                <h2 class="title is-3"></h2>
-                <div class="content has-text-justified">
-                    <h2> Core Components and Operational Mechanism </h2>
-                    <hr>
-                    AutoDAN-Turbo contains three components as shown in Figure 1:
-                    <ol>
-                        <li><strong>Attack Generation and Exploration Module</strong></li>
-                        <ul>
-                            <li>generates jailbreak prompt to attack the target LLM by leveraging the strategies
-                                provided by <em>Jailbreak Strategy Retrival Module</em></li>
-                            <li>constructs the attack log for <em>Strategy Library Construction Module</em> to extract
-                                the strategies
-                            </li>
-                        </ul>
-                        <li><strong>Strategy Library Construction Module</strong></li>
-                        <ul>
-                            <li>
-                                extracts strategies from the attack logs generated in <em>Attack Generation and
-                                Exploration Module</em>
-                            </li>
-                            <li>
-                                saves new evolved strategy into the Strategy Library
-                            </li>
-                        </ul>
-
-                        <li><strong>Jailbreak Strategy Retrieval Module</strong></li>
-                        <ul>
-                            <li>
-                                supports the <em>Attack Generation and Exploration Module</em> to retrieve the strategy
-                                from the
-                                strategy library constructed by <em>Strategy Library Construction Module</em> so that
-                                the retrieved
-                                jailbreak strategy can guide the jailbreak prompt generation to attack the victim LLMs.
-                            </li>
-                        </ul>
-                    </ol>
-
-                    <h3 id="module_1">Attack Generation and Exploration Module</h3>
-                    <hr>
-                    Three LLMs are involved in this module: an attacker LLM, a Target LLM (the victim
-                    model we want to jailbreak), and a scorer LLM. Specifically, the attack loop contains the following
-                    steps:
-                    <ol>
-                        <li><strong>Attack Generation</strong>: The attacker LLM receives specific prompts that
-                            describe the malicious request M and encourages the attacker LLM to generate a jailbreak
-                            prompt using specific jailbreak strategies. Then the attacker LLM then generates the
-                            jailbreak prompt P.
-                        </li>
-                        <li><strong>Target Response</strong>: Upon receiving P as input, the target LLM generates a
-                            response R.
-                        </li>
-                        <li><strong>Scorer Evaluation</strong>: The response R is then evaluated by the scorer LLM. This
-                            evaluation determines whether the response meets the malicious goal of the jailbreak attack.
-                            The scorer LLM returns a numerical score S based on predefined criteria: The scores range
-                            from 1, indicating no alignment with malicious intent, to 10, representing full compliance
-                            with harmful directives.
-                        </li>
-                    </ol>
-
-                    <h3>Strategy Library Construction Module</h3>
-                    <hr>
-                    Since the goal of our framework is to automatically construct strategies from scratch, for
-                    efficiency, we design two stage methods:
-                    <ol>
-                        <li><strong>Warm-up Exploration Stage</strong>: In the warm-up exploration stage, each malicious
-                            request undergoes multiple iterations in the Attack Generation and Exploration Module. This
-                            results in an attack log containing the attack prompt, target response, and score for each
-                            iteration. From this log, we extract strategies that led to a score improvement. A
-                            summarizer Large Language Model (LLM) provides a description and concise definition of the
-                            strategy, formatted into a JSON object, which includes the strategy name, definition, and an
-                            example. To organize the strategy library for efficient retrieval, a text embedding model is
-                            used to convert the target response into a key. The value consists of the attack prompt,
-                            next attack prompt, and score differential. This process is repeated with different
-                            malicious requests, adding the key and value to the strategy library.
-                            <a href="blank_">For more details</a>
-                        </li>
-                        <li><strong>Running-time Lifelong Learning Stage</strong>: AutoDAN-Turbo employs a persistent
-                            learning approach at the running stage, following an initial warm-up strategy, to enhance
-                            our strategy library. This involves performing iterative attack loops on a dataset of
-                            multiple malicious requests until a termination condition is met. In each iteration, an
-                            Attack Generation module formulates a new attack strategy based on previous responses, which
-                            can be stored for future use in the strategy library. This process continues until a score
-                            threshold is met or a maximum iteration limit is reached, ensuring efficient and robust
-                            strategy augmentation.
-                            <a href="blank_">For more details</a>
-                        </li>
-                    </ol>
-                    <img class="image" src="static/images/strategy_lib.png">
-                    <p class="image-caption">Figure 2: Skeleton of the Strategy Library</p>
-
-                    <h3>Jailbreak Strategy Retrieval Module</h3>
-                    <hr>
-                    Our framework retrieves jailbreak strategies from a library and prompts an attacker learning
-                    language model (LLM) to generate jailbreak prompts. Given a malicious request, we process it through
-                    a generation and exploration module to get a response, which is then transformed into an embedding
-                    vector. This vector is compared with all keys in the strategy library, and the top strategies
-                    leading to the highest score differences are selected. These strategies form a list that is inserted
-                    into the attacker LLM's prompt for the next attack iteration. Strategies are categorized as
-                    effective, less effective, or ineffective based on their scores, and are used accordingly in the
-                    prompts. If no strategies are available, an empty strategy is provided to the attacker LLM.
-                </div>
-            </div>
-        </div>
-    </div>
-    -->
-    
+</section>
+<!-- End paper method -->
+     
+<!-- Paper method -->
+<section class="hero is-light">
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column column is-full">
@@ -670,7 +564,8 @@
         </div>
     </div>
 </section>
-
+<!-- End paper method -->
+    
 <section>
     <div class="content-container">
         <h1 class="center-align-content">Playground</h1>
