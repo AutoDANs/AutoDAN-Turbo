@@ -474,13 +474,14 @@
                 <div class="item">
                     <!-- Your image here -->
                     <img class="image" src="static/images/pipe.png" alt="Pipeline"/>
-                    <p class="image-caption">Figure 1: AutoDAN-Turbo Pipeline</p>
+                    <p class="image-caption">AutoDAN-Turbo Pipeline</p>
                 </div>
 
                 <div class="content has-text-justified">
+                    <h2>Features</h2>
+                    <hr>
                     <h4>Automatic Strategy Discovery</h4>
                     AutoDAN-Turbo can discover new jailbreak strategies without human intervention or reliance on predefined strategies. The system learns from previously discovered strategies, enhancing its ability to devise even more powerful and efficient strategies over time. AutoDAN-Turbo can automatically convert discovered strategies into a specific data structure. This structure is then incorporated into a strategy library, which AutoDAN-Turbo can reference and utilize in future jailbreak attempts. 
-                    <!--
                     <br>
                     <br>
                     <!-- property 2  -->
@@ -494,17 +495,15 @@
                     <br>
                     <!-- property 3  -->
                     <h4>Practical Usage</h4>
-                    AutoDAN-Turbo operates as a black-box system, requiring access only to the outputs of the Large
-                    Language Models (LLMs) and does not necessitate any interaction with the underlying LLM
+                    AutoDAN-Turbo operates as a black-box system, requiring access only to the outputs of the LLMs.
                     infrastructure.
-                    -->
                     <br>
                     <video preload controls autoplay loop muted playsinline class="image">
                         <source src="static/videos/banner_video.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <p class="image-caption">
-                    As demonstrated in our video, AutoDAN-Turbo persistently attempts jailbreaking against various
+                    As illustrated in our video, AutoDAN-Turbo persistently attempts jailbreaking against various
                     malicious requests. Throughout this ongoing endeavor, it progressively evolves and refines
                     increasingly complex jailbreak strategies. Remarkably, this entire process is fully
                     automated, devoid of human intervention.
@@ -629,56 +628,33 @@
             <div class="column column is-full">
                 <h2 class="title is-3"></h2>
                 <div class="content has-text-justified">
-                    <h2> Evaluation and More Functionalities </h2>
+                    <h2> Evaluations </h2>
                     <hr>
-                    <p>During the Evaluation phase of AutoDAN-Turbo, the strategy library is solidified, and we cease to
-                        utilize the summarizer Large Language Model (LLM) to extract and preserve strategies from attack
-                        logs.</p>
-
-                    <img class="center" src="static/images/performance_comp.png" width="500">
+                    <h4>Main Results</h4>
+                    <img class="center" src="static/images/main_results.png" width="500">
                     <br>
-                    <p class="image-caption">AutoDAN-Turbo outperforms other black-box baselines in
-                        Harmbench.</p>
-                    <p>As depicted in Figure 3, we conducted a comprehensive comparison of AutoDAN-Turbo with other
-                        baseline methods in terms of attack effectiveness on Harmbench. Notably, AutoDAN-Turbo
-                        consistently outperforms the baselines, demonstrating superior attack performance against
-                        varying Target LLMs.</p>
+                    <p class="image-caption">Top: The ASR results evaluated using the Harmbench protocol, where higher values indicate better performance. Bottom: The scores evaluated using the StrongREJECT protocol, also with higher values being better. Our method outperforms the runner-up by 72.4% in Harmbench ASR and by 93.1% in StrongREJECT scores. The model name in parentheses indicates the attacker model used in our method.</p>
+                    <img class="center" src="static/images/main_results_harmbench.png" width="500">
+                    <br>
+                    <p class="image-caption">Our method is the state-of-the-art attack in Harmbench.</p>
+                    We compare the attack effectiveness of AutoDAN-Turbo with other baselines. Specifically, we evaluate two versions of our AutoDAN-Turbo, AutoDAN-Turbo (Gemma-7B-it), where Gemma-7B-it serves as the attacker and the strategy summarizer, and AutoDAN-Turbo (Llama-3-70B), where the Llama-3-70B serves as the attacker and the strategy summarizer.
+                    <br>
+                    As illustrated above, our method AutoDAN-Turbo consistently achieves better performance in both Harmbench ASR and StrongREJECT Score, which means that our method not only induces the target LLM to answer and provide harmful content in more malicious requests, as measured by the Harmbench ASR, but also results in a higher level of maliciousness compared to responses induced by other attacks, as indicated by the StrongREJECT Score. Specifically, if we use the Gemma-7B-it model as the attacker and strategy summarizer in our method (i.e., AutoDAN-Turbo (Gemma-7B-it)), we have an average Harmbench ASR of 56.4, surpassing the runner-up (Rainbow Teaming, $33.1$) by 70.4%, and StrongREJECT Score equals to 0.24, surpassing the runner up (Rainbow Teaming, 0.13) by 84.6%. If we utilize a larger model, i.e., the Llama-3-70B as the attacker and strategy summarizer in our method (i.e., AutoDAN-Turbo (Llama-3-70B)), we have an average Harmbench ASR of 57.7, surpassing the runner-up (Rainbow Teaming, $33.1$) by 74.3%, and StrongREJECT Score equals to 0.25, surpassing the runner up (Rainbow Teaming, 0.13) by 92.3%. Interestingly, our method demonstrates remarkable jailbreak effectiveness on one of the most powerful models, GPT-4-1106-turbo. Specifically, AutoDAN-Turbo (Gemma-7B-it) achieves a Harmbench ASR of 83.8, and AutoDAN-Turbo (Llama-3-70B) achieves 88.5, showcasing the great effectiveness of our method on state-of-the-art models. We also compare our method with all the jailbreak attacks included in Hrambench, which shows our method is the most powerful jailbreak attack in Harmbench. The outstanding performance of our method compared to the baselines is due to the autonomous exploration of jailbreak strategies without human intervention or predefined scopes. In contrast, Rainbow Teaming only utilizes 8 human-developed jailbreak strategies as its jailbreak reference. This fixed predefined scope leads to a lower ASR.
 
-                    <h4>Transferability of Strategy Library</h4>
-                    AutoDAN-Turbo develops a strategy library that exhibits strong transferability across different
-                    attacker and target LLMs. This library, initially established using Llama-2-7B-chat as the attacker,
-                    target, and scorer, contains 21 jailbreak strategies. We test the library's effectiveness in two
-                    scenarios: a static library use, and a continual learning mode where the library is updated with new
-                    attack logs. The results consistently show high effectiveness, indicating that strategies developed
-                    for one model can be employed by other LLM jailbreak attackers. Furthermore, the library dynamically
-                    improves under continual learning settings, affirming our model's ability to evolve and adapt.
+                    <h4>Strategy Transferability across Different Models</h4>
+                    Our experiments on the transferability of the strategy library that AutoDAN-Turbo has learned proceed as follows: First, we run AutoDAN-Turbo with Llama-2-7B-chat. This process results in a skill library containing 21 jailbreak strategies. We then use different attacker LLMs and different target LLMs to evaluate if the strategy library can still be effective across various attacker and target LLMs. The evaluation has two different settings. In the first setting, we test if the strategy library can be directly used without any updates, by fixing the strategy library and measuring the Harmbench ASR (noted as Pre-ASR). In the second setting, the strategy library is updated according to new attack logs generated by new attacker and target LLMs, and new strategies are added to the library. We also report the Harmbench ASR in this setting (noted as Post-ASR), as well as the number of strategies in the strategy library (noted as Post-TSF).
                     <img class="image" src="static/images/trans.png">
                     <p class="image-caption">Table 1: Transferability of strategy library across different attacker
                         and target LLMs</p>
+                    According to the results, the strategy library that AutoDAN-Turbo has learned demonstrates strong transferability, which can be detailed in two points: Firstly, the strategy library can transfer across different target models. This is evident from the columns in blue, where the attacker is Llama-2-7B-chat and the target models vary. Despite the diversity of the victim models, the Harmbench ASR remains consistently high, indicating effective jailbreaks. This means that the strategies learned by attacking Llama-2-7B-chat are also effective against other models like Llama-3-8B and Gemma-7B-it. Secondly, the strategy library can transfer across different attacker models. This is shown in the columns in gray, where the target model is Llama-2-7B-chat and the attacker models vary. Each attacker model achieves a high ASR compared to the original attacker, Llama-2-7B-chat. This indicates that strategies used by one attacker can also be leveraged by other LLM jailbreak attackers. Another important observation is that, under the continual learning setting, the AutoDAN-Turbo framework can effectively update the strategy library with new attacker and target LLMs, thereby improving the Harmbench ASR. This is validated by comparing the Pre-ASR with the Post-ASR, and by comparing the Post-TSF with the original TSF which equals to 21.
 
                     <h4>Compatibility of Human-developed Strategy</h4>
-                    AutoDAN-Turbo is a unified framework that seamlessly incorporates human-designed
-                    jailbreak strategies in a plug-and-play manner. It has been tested with strategies from various
-                    academic sources and has demonstrated improved performance. The framework has two key stages for
-                    injecting these strategies: at the start when the strategy library is empty (Breakpoint 1) and
-                    after 3000
-                    iterations without generating new strategies (Breakpoint 2). The integration of these
-                    human-designed strategies has
-                    consistently boosted the quantity and quality of strategies in our library, particularly when
-                    introduced at the second stage, allowing more complex jailbreak strategy combinations to be
-                    generated.
+                    We evaluate whether our AutoDAN-Turbo can use existing human-designed jailbreak strategies in a plug-and-play manner. Here, we gathered 7 human-designed jailbreak strategies from academic papers and evaluated whether our AutoDAN-Turbo framework can use these strategies to enhance its performance. For evaluation, we use Gemma-7B-it and Llama-3-70B as the attacker models, and Llama-2-7B-chat and GPT-4-1106-turbo as the target models. We define two breakpoints for injecting the human-developed strategies into the AutoDAN-Turbo framework: Breakpoint 1: when the framework starts to run and the strategy library is empty. Breakpoint 2: after the framework has run for 3000 iterations on different malicious requests without generating any new strategies.
                     <img class="image" src="static/images/human.png">
                     <p class="image-caption">Table 2: The attack performance of AutoDAN-Turbo when external
                         human-designed strategies are injected into the framework</p>
-
-                    <h2>Harmbench Baseline Results</h2>
-                    <hr>
-                    Here, we present the Harmbench baseline results, inclusive of AutoDAN-Turbo's performance. Harmbench
-                    employs the Attack Success Rate (ASR) as a measure to characterize the jailbreak performance across
-                    different baselines.
-                    <img class="image" src="static/images/baseline.png">
-                    <p class="image-caption">Table 3: AutoDAN-Turbo is the state-of-art attack in Harmbench</p>
-
+                    As shown above, the injection of human-designed strategies consistently increases the number of strategies in the strategy library and improves the attack success rate. Additionally, injecting strategies at Breakpoint 2 leads to greater improvements since the existing strategies in the library allow the framework to generate more combinations of jailbreak strategies compared to Breakpoint 1, where the strategy library was empty.
+                    
                     <h2>AutoDAN-Turbo Dataset Access</h2>
                     <hr>
                     <p>During the continuous progression of AutoDAN-Turbo, numerous jailbreak attempts are made against
